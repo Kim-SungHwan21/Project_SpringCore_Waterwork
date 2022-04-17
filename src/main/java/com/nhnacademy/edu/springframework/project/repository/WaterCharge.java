@@ -1,5 +1,6 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
+
 public class WaterCharge {
 
     private final int number;
@@ -8,11 +9,11 @@ public class WaterCharge {
     private final int step;
     private final int startSection;
     private final int endSection;
-    private final int unitPrice;
-    private final int billTotal;
+    private final long unitPrice;
+//    private final int billTotal;
 
     public WaterCharge(int number, String city, String sector, int step,
-                       int startSection, int endSection, int unitPrice, int billTotal) {
+                       int startSection, int endSection, long unitPrice) {
         this.number = number;
         this.city = city;
         this.sector = sector;
@@ -20,15 +21,46 @@ public class WaterCharge {
         this.startSection = startSection;
         this.endSection = endSection;
         this.unitPrice = unitPrice;
-        this.billTotal = billTotal;
     }
 
     @Override
     public String toString() {
-        return "WaterBill{city='" + city +
-            "', sector='" + sector +
-            "', unitPrice=" + unitPrice +
-            ", billTotal=" + billTotal +
+        return "WaterCharge{" +
+            "number=" + number +
+            ", city='" + city + '\'' +
+            ", sector='" + sector + '\'' +
+            ", step=" + step +
+            ", startSection=" + startSection +
+            ", endSection=" + endSection +
+            ", unitPrice=" + unitPrice +
             '}';
+    }
+
+    public long resultUnitPrice(int amount) {
+        long result = 0;
+        if (amount > startSection && amount < endSection) {
+            result = unitPrice;
+        }
+        return result;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public int getUnitPrice() {
+        return (int) unitPrice;
+    }
+
+    public int getStartSection() {
+        return startSection;
+    }
+
+    public int getEndSection() {
+        return endSection;
     }
 }

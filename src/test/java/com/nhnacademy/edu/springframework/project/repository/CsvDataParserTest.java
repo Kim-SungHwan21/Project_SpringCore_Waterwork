@@ -1,22 +1,23 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.stereotype.Repository;
+import org.junit.jupiter.api.Test;
+
+class CsvDataParserTest {
 
 
-@Repository
-public class CsvDataParser implements DataParsers {
 
-    private final Map<Integer,WaterCharge> dataParsers = new HashMap<>();
-
-    @Override
-    public void load() {
+    @Test
+    void load() {
+        final Map<Integer,WaterCharge> dataParsers = new HashMap<>();
         String line = "";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("./data/Tariff_20220331.csv")))) {
             while ((line = br.readLine()) != null) { // readLine()은 파일에서 개행된 한 줄의 데이터를 읽어온다.
@@ -38,17 +39,7 @@ public class CsvDataParser implements DataParsers {
             e.printStackTrace();
         }
 
-    }
-
-    @Override
-    public Collection<WaterCharge> findAll() {
-        return this.dataParsers.values();
-    }
-
-    @Override
-    public int size() {
-        return dataParsers.size();
+        assertThat(dataParsers.size()).isEqualTo(303);
     }
 
 }
-

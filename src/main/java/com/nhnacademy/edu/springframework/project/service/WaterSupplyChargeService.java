@@ -1,8 +1,11 @@
 package com.nhnacademy.edu.springframework.project.service;
 
-import com.nhnacademy.edu.springframework.project.repository.WaterCharge;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 
 public interface WaterSupplyChargeService {
-    Collection<WaterCharge> calculateCharge();
+    Collection<WaterBill> calculateCharge(int amount);
+    Collection<WaterBill> reportArrayList(List<WaterBill> sortArray);
 }
